@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+  <tabs>
+    <Tab text="Add new">
+         <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="750.0">
+               <children>
+                  <Label fx:id="word" layoutX="7.0" layoutY="39.0" prefHeight="32.0" prefWidth="423.0" AnchorPane.leftAnchor="5.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font></Label>
+                  <ImageView fx:id="image" fitHeight="36.0" fitWidth="410.0" layoutX="33.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" />
+                  <TextArea fx:id="translation" layoutX="322.0" layoutY="34.0" prefHeight="225.0" prefWidth="290.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font></TextArea>
+                  <GridPane layoutX="291.0" layoutY="231.0" prefHeight="89.0" prefWidth="336.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="280.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="123.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="129.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="126.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#add_known" prefHeight="26.0" prefWidth="196.0" text="Known" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#add_to_repeat" prefHeight="26.0" prefWidth="187.0" text="To repeat" GridPane.columnIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#add_to_learn" prefHeight="26.0" prefWidth="222.0" text="To learn" GridPane.columnIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#undo" prefHeight="26.0" prefWidth="200.0" text="Undo" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#save_action" prefHeight="26.0" prefWidth="190.0" text="Save" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="new_value" prefHeight="26.0" prefWidth="123.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#fix" prefHeight="26.0" prefWidth="284.0" text="Fix" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <Label fx:id="info" layoutX="32.0" layoutY="6.0" prefHeight="16.0" prefWidth="71.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="progress_bar" layoutX="117.0" layoutY="345.0" prefWidth="200.0" progress="0.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+               </children></AnchorPane>
+         </content>
+    </Tab>
+    <Tab onSelectionChanged="#reload_known" text="Known">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="known_table" layoutX="14.0" layoutY="28.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                  <Label fx:id="number_of_known" layoutX="14.0" layoutY="6.0" prefHeight="16.0" prefWidth="237.0" text="Aktualna liczba rekordów: " />
+                  <Button layoutX="410.0" layoutY="1.0" mnemonicParsing="false" onAction="#generate_pdf_known" text="Generate PDF" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="search_known" layoutX="470.0" layoutY="1.0" onAction="#search_in_known" onInputMethodTextChanged="#search_in_repeat" promptText="search ..." />
+               </children></AnchorPane>
+         </content>
+    </Tab>
+      <Tab onSelectionChanged="#reload_repeat" text="To repeat">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="repeat_table" layoutX="14.0" layoutY="28.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                  <Label fx:id="number_of_repeat" layoutX="14.0" layoutY="6.0" prefHeight="16.0" prefWidth="237.0" text="Aktualna liczba rekordów: " />
+                  <Button layoutX="410.0" layoutY="1.0" mnemonicParsing="false" onAction="#generate_pdf_repeat" text="Generate PDF" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="search_repeat" layoutX="470.0" layoutY="1.0" onAction="#search_in_repeat" onInputMethodTextChanged="#search_in_repeat" promptText="search ..." />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab onSelectionChanged="#reload_learn" text="To learn">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="learn_table" layoutX="14.0" layoutY="28.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                  <Label fx:id="number_of_learn" layoutX="14.0" layoutY="6.0" prefHeight="16.0" prefWidth="237.0" text="Aktualna liczba rekordów: " />
+                  <Button layoutX="410.0" layoutY="1.0" mnemonicParsing="false" onAction="#generate_pdf_learn" text="Generate PDF" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="search_learn" layoutX="470.0" layoutY="1.0" onAction="#search_in_learn" onInputMethodTextChanged="#search_in_repeat" promptText="search ..." />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
