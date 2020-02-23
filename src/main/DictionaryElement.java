@@ -1,10 +1,10 @@
 package main;
 
-class DictionaryElement {
-    String englishWord;
-    String meanings;
+public class DictionaryElement {
+    public String englishWord;
+    public String meanings;
 
-    DictionaryElement(String englishWord, String meanings) {
+    public DictionaryElement(String englishWord, String meanings) {
         this.englishWord = englishWord;
         this.meanings = meanings;
     }

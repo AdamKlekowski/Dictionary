@@ -10,11 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main_view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/main_view.fxml"));
 
         stage.setTitle("Dictionary");
         stage.setScene(new Scene(root));
-        //stage.getIcons().add(new Image("file:icon.png"));
         stage.show();
     }
 

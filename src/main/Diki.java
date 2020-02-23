@@ -12,8 +12,8 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 public class Diki {
-    static DictionaryElement downloadTranslation(String word) {
-        String translation = new String();
+    public static DictionaryElement downloadTranslation(String word) {
+        String translation = "";
 
         try {
             Document document = Jsoup.connect("https://www.diki.pl/slownik-angielskiego?q=" + word).get();

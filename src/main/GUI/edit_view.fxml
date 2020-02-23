@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.EditController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GUI.EditController">
    <children>
       <TextField fx:id="edit_word" layoutX="6.0" layoutY="46.0" prefHeight="26.0" prefWidth="370.0" />
       <Button fx:id="save" layoutX="6.0" layoutY="325.0" mnemonicParsing="false" onAction="#edit_save" prefHeight="26.0" prefWidth="370.0" text="Save" />

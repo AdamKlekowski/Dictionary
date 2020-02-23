@@ -3,13 +3,13 @@ package main;
 import java.io.*;
 import java.util.ArrayList;
 
-class Model {
-    static ArrayList<String> list_unknown = new ArrayList<>();
-    static ArrayList<DictionaryElement> list_known = new ArrayList<>();
-    static ArrayList<DictionaryElement> list_to_repeat = new ArrayList<>();
-    static ArrayList<DictionaryElement> list_to_learn = new ArrayList<>();
+public class Model {
+    public static ArrayList<String> list_unknown = new ArrayList<>();
+    public static ArrayList<DictionaryElement> list_known = new ArrayList<>();
+    public static ArrayList<DictionaryElement> list_to_repeat = new ArrayList<>();
+    public static ArrayList<DictionaryElement> list_to_learn = new ArrayList<>();
 
-    Model() {
+    public Model() {
         try {
             load_from_file("input.txt", list_unknown);
             load_from_CSVfile("known.txt", list_known);
@@ -61,7 +61,7 @@ class Model {
         outputFile.close();
     }
 
-    void save() {
+    public void save() {
         try {
             save_to_file();
             save_to_CSVfile("known.txt", list_known);

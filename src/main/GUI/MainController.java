@@ -1,4 +1,4 @@
-package main;
+package main.GUI;
 
 import com.itextpdf.text.DocumentException;
 import javafx.collections.FXCollections;
@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import main.*;
 
 import java.io.File;
 import java.io.IOException;

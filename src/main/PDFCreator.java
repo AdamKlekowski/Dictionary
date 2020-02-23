@@ -13,11 +13,10 @@ import com.itextpdf.layout.property.UnitValue;
 import com.itextpdf.text.pdf.BaseFont;
 
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-class PDFCreator {
-    static void generatePDF(ArrayList<DictionaryElement> list) throws FileNotFoundException {
+public class PDFCreator {
+    public static void generatePDF(ArrayList<DictionaryElement> list) throws FileNotFoundException {
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter("files/result.pdf"));
         Document doc = new Document(pdfDoc);
 
@@ -26,8 +25,6 @@ class PDFCreator {
             doc.setFont(font5);
         }
         catch (Exception ignored) {}
-
-        //doc.add(new Paragraph(begin + "-" + end + " słów, wersja 1"));
 
         float[] columnWidths = {1, 1, 4};
         Table table = new Table(UnitValue.createPointArray(columnWidths));

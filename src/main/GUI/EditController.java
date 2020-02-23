@@ -1,4 +1,4 @@
-package main;
+package main.GUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import main.DictionaryElement;
 
 import java.io.File;
 import java.net.URL;
