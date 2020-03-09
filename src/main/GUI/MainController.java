@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -18,11 +19,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 import main.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -365,6 +369,54 @@ public class MainController implements Initializable {
         addEditButtonToTable(learn_table, model.list_to_learn);
         addMoveButtonToTable(learn_table, model.list_to_learn);
         number_of_learn.setText("Current number of records: " + result.size());
+    }
+
+    @FXML StackedBarChart daily_chart;
+    @FXML PieChart overall_chart;
+
+    @FXML
+    void reload_charts() {
+        XYChart.Series KnownDataSeries = new XYChart.Series();
+        KnownDataSeries.setName("known");
+        for(StatisticData elem : model.statistics) {
+            KnownDataSeries.getData().add(new XYChart.Data(elem.getDate(), elem.getKnown_number()));
+        }
+
+        XYChart.Series RepeatDataSeries = new XYChart.Series();
+        RepeatDataSeries.setName("to repeat");
+        for(StatisticData elem : model.statistics) {
+            RepeatDataSeries.getData().add(new XYChart.Data(elem.getDate(), elem.getRepeat_number()));
+        }
+
+        XYChart.Series LearnDataSeries = new XYChart.Series();
+        LearnDataSeries.setName("to learn");
+        for(StatisticData elem : model.statistics) {
+            LearnDataSeries.getData().add(new XYChart.Data(elem.getDate(), elem.getLearn_number()));
+        }
+        
+        daily_chart.getData().clear();
+        daily_chart.setAnimated(false);
+        daily_chart.setLegendVisible(true);
+        daily_chart.getData().addAll(KnownDataSeries, RepeatDataSeries, LearnDataSeries);
+        //------------------------------------------------
+        ObservableList<PieChart.Data> valueList = FXCollections.observableArrayList(
+                new PieChart.Data("unknown (" +  model.list_unknown.size() + ")", model.list_unknown.size()),
+                new PieChart.Data("known (" +  model.list_known.size() + ")", model.list_known.size()),
+                new PieChart.Data("to repeat (" +  model.list_to_repeat.size() + ")", model.list_to_repeat.size()),
+                new PieChart.Data("to learn (" +  model.list_to_learn.size() + ")", model.list_to_learn.size())
+        );
+
+        overall_chart.getData().clear();
+        overall_chart.setAnimated(false);
+        int done = Model.list_known.size() + Model.list_to_repeat.size() + Model.list_to_learn.size();
+        int overall = done + Model.list_unknown.size();
+        overall_chart.setTitle("Overall (" + done + "/" + overall + ")");
+        overall_chart.setData(valueList);
+    }
+
+    @FXML TextField daily_goal;
+    @FXML void edit_daily_goal() {
+        Model.daily_goal = Integer.parseInt(daily_goal.getText());
     }
 
     @Override
