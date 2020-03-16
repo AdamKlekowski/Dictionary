@@ -1,12 +1,17 @@
 package main;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Model {
     public static ArrayList<String> list_unknown = new ArrayList<>();
@@ -107,16 +112,29 @@ public class Model {
         outputFile.close();
     }
 
-    public void save() {
+    public void save(ProgressIndicator saving_progress, Label saving_info) {
         try {
+            saving_info.setTextFill(Color.web("#ff0000", 0.8));
+            saving_info.setText("saving ...");
+            //int total_number = list_unknown.size() + number_of_known + number_of_learn + number_of_repeat + 11;
+
             update_daily_progress();
             save_to_file();
             save_to_CSVfile("known.txt", list_known);
             save_to_CSVfile("to_repeat.txt", list_to_repeat);
             save_to_CSVfile("to_learn.txt", list_to_learn);
             save_statistics();
+
+            saving_info.setTextFill(Color.web("#008000", 1));
+            saving_info.setText("saved");
         }
-        catch (IOException ignored) {}
+        catch (IOException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Some errors occur during saving!");
+            alert.setContentText(ex.toString());
+            alert.showAndWait();
+        }
     }
 
     void update_daily_progress() {
