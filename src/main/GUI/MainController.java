@@ -58,6 +58,8 @@ public class MainController implements Initializable {
         translation.setText(current_element.meanings.replace("; ", "\n"));
 
         new_value.setText(current_element.englishWord);
+
+        saving_info.setText("");
     }
 
     @FXML TextField new_value;
@@ -77,7 +79,7 @@ public class MainController implements Initializable {
         load();
 
         counter++;
-        if (counter % 10 == 0) model.save();
+        if (counter % 10 == 0) model.save(saving_progress, saving_info);
     }
 
     @FXML
@@ -109,9 +111,12 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML Label saving_info;
+    @FXML ProgressIndicator saving_progress;
+
     @FXML
     void save_action() {
-        model.save();
+        model.save(saving_progress, saving_info);
     }
 
     @FXML
@@ -376,6 +381,8 @@ public class MainController implements Initializable {
 
     @FXML
     void reload_charts() {
+        estimateTimeToEnd();
+
         XYChart.Series KnownDataSeries = new XYChart.Series();
         KnownDataSeries.setName("known");
         for(StatisticData elem : model.statistics) {
@@ -400,10 +407,10 @@ public class MainController implements Initializable {
         daily_chart.getData().addAll(KnownDataSeries, RepeatDataSeries, LearnDataSeries);
         //------------------------------------------------
         ObservableList<PieChart.Data> valueList = FXCollections.observableArrayList(
-                new PieChart.Data("unknown (" +  model.list_unknown.size() + ")", model.list_unknown.size()),
                 new PieChart.Data("known (" +  model.list_known.size() + ")", model.list_known.size()),
                 new PieChart.Data("to repeat (" +  model.list_to_repeat.size() + ")", model.list_to_repeat.size()),
-                new PieChart.Data("to learn (" +  model.list_to_learn.size() + ")", model.list_to_learn.size())
+                new PieChart.Data("to learn (" +  model.list_to_learn.size() + ")", model.list_to_learn.size()),
+                new PieChart.Data("unknown (" +  model.list_unknown.size() + ")", model.list_unknown.size())
         );
 
         overall_chart.getData().clear();
@@ -414,9 +421,21 @@ public class MainController implements Initializable {
         overall_chart.setData(valueList);
     }
 
-    @FXML TextField daily_goal;
-    @FXML void edit_daily_goal() {
-        Model.daily_goal = Integer.parseInt(daily_goal.getText());
+    @FXML Label days_to_end;
+    @FXML void estimateTimeToEnd() {
+        //int days = Days.daysBetween(date1, date2).getDays();
+        int days = 10;
+
+        int sum = 0;
+        for(StatisticData elem : Model.statistics) {
+            sum += elem.getKnown_number() + elem.getRepeat_number() + elem.getLearn_number();
+        }
+
+        double day_avarage = sum/(double)days;
+        System.out.println(day_avarage);
+        double daysToEnd = Model.list_unknown.size()/day_avarage;
+        System.out.println(daysToEnd);
+        days_to_end.setText((int)daysToEnd + " days");
     }
 
     @Override
