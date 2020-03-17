@@ -4,7 +4,11 @@
 * [Technologies](#technologies)
 
 ## General info
-Project was realised for my cousin in order to help him. The main goal was prepared application 
+Own project was realised for my cousin. The main goal of this application is help with division english words into proper categories (known, to repeat, to learn) and generate PDF files with these words.
+
+1. A list of english words is loaded from .txt file.
+2. Application downloads pronunciation and meanings for current word from diki.pl dictionary (using __JSoup__).
+3. User asigns word to proper catergory (known, to repeat, to learn).
 
 ## Screenshots
 ![Main Window](https://github.com/AdamKlekowski/screenshots/blob/master/dictionary1.png)
