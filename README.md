@@ -13,14 +13,16 @@ Project was realised for my cousin. The main goal of this application is help wi
 Screenshots below.
 
 ## Screenshots
-![Main Window](https://github.com/AdamKlekowski/screenshots/blob/master/dictionary1.png)
-![Table Window](https://github.com/AdamKlekowski/screenshots/blob/master/dictionary2.png)
-![Generated PDF](https://github.com/AdamKlekowski/screenshots/blob/master/dictionary3.png)
-![Statisitc Window](https://github.com/AdamKlekowski/screenshots/blob/master/dictionary4.png)
+![Main Window](screenshots/dictionary1.png)
+![Table Window](screenshots/dictionary2.png)
+![Generated PDF](screenshots/dictionary3.png)
+![Statisitc Window](screenshots/dictionary4.png)
 
 ## Technologies
 Project is created with:
 * Java 10
 * JavaFx 11.0
-* JSoup 1.12
-* iText 5.4
+* JSoup 1.12\
+library for working with real-world HTML
+* iText 5.4\
+library for creating and manipulating PDF files
