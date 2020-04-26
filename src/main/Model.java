@@ -60,7 +60,17 @@ public class Model {
 
         String line;
         while ((line = br.readLine()) != null) {
-            list.add(DictionaryElement.fromString(line));
+            try {
+                list.add(DictionaryElement.fromString(line));
+            } catch (IllegalArgumentException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Some errors occur during loading file " + file_name);
+                alert.setContentText("\"" + line + "\" was not recognised as a proper word. \n" +
+                        "This value will be avoided during a next saving.");
+                alert.show();
+            }
+
         }
         br.close();
         fileStream.close();

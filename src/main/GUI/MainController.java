@@ -19,14 +19,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.Pair;
 import main.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -37,7 +33,6 @@ public class MainController implements Initializable {
     @FXML TextArea translation;
     @FXML Label info;
     private int counter = 0;
-
 
     private DictionaryElement current_element;
     private ArrayList<DictionaryElement> last_list;
@@ -415,15 +410,13 @@ public class MainController implements Initializable {
 
         overall_chart.getData().clear();
         overall_chart.setAnimated(false);
-        int done = Model.list_known.size() + Model.list_to_repeat.size() + Model.list_to_learn.size();
-        int overall = done + Model.list_unknown.size();
-        overall_chart.setTitle("Overall (" + done + "/" + overall + ")");
         overall_chart.setData(valueList);
     }
 
     @FXML Label days_to_end;
+    @FXML Label avg;
+    @FXML Label overall;
     @FXML void estimateTimeToEnd() {
-        //int days = Days.daysBetween(date1, date2).getDays();
         int days = 10;
 
         int sum = 0;
@@ -432,10 +425,16 @@ public class MainController implements Initializable {
         }
 
         double day_avarage = sum/(double)days;
-        System.out.println(day_avarage);
         double daysToEnd = Model.list_unknown.size()/day_avarage;
-        System.out.println(daysToEnd);
         days_to_end.setText((int)daysToEnd + " days");
+
+        //avg
+        avg.setText(String.valueOf(day_avarage));
+
+        // overall
+        int done = Model.list_known.size() + Model.list_to_repeat.size() + Model.list_to_learn.size();
+        int total = done + Model.list_unknown.size();
+        overall.setText(done + "/" + total);
     }
 
     @Override

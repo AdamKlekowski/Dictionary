@@ -18,8 +18,10 @@ public class DictionaryElement {
         if(arg.length == 2) {
             return new DictionaryElement(arg[0], arg[1]);
         }
-        else {
+        else if (arg.length == 1) {
             return new DictionaryElement(arg[0], "");
+        } else {
+            throw new IllegalArgumentException(line);
         }
     }
 }
